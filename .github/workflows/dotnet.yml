@@ -30,9 +30,9 @@ jobs:
       uses: microsoft/variable-substitution@v1
       with:
         files: './uat-dotnet-core-github-action/appsettings.json'
-        env:
-          ProjectSettings.ProjectName:"UAT Project",
-          ProjectSettings.ProjectName:"This is a UAT project."
+      env:
+        ProjectSettings.ProjectName:"UAT Project",
+        ProjectSettings.ProjectName:"This is a UAT project."
     - name: Deploy to IIS
       run:  |
           stop-webapppool uat-dotnet-core-github-action
