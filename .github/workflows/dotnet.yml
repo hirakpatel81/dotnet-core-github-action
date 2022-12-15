@@ -22,10 +22,13 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
+    - name: Building Project
       run: dotnet build --configuration Release
-    - name: Publish
+    - name: Publish Project
       run: dotnet publish -c Release -o .\dotnet-core-github-action
     - name: Deploy to IIS
-      run:  Copy-item ./dotnet-core-github-action/* C:/inetpub/wwwroot/dotnet-core-github-action -Recurse -Force
+      run:  |
+          stop-webapppool dotnet-core-github-action
+          Copy-item ./dotnet-core-github-action/* C:/inetpub/wwwroot/dotnet-core-github-action -Recurse -Force
+          start-webapppool dotnet-core-github-action
        
