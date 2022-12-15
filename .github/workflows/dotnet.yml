@@ -25,10 +25,17 @@ jobs:
     - name: Building Project
       run: dotnet build --configuration Release
     - name: Publish Project
-      run: dotnet publish -c Release -o .\dotnet-core-github-action
+      run: dotnet publish -c Release -o .\uat-dotnet-core-github-action
+    - name: Replace App Settings Value
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '${{env.DOTNET_ROOT}}\dotnet-core-github-action\appsettings.json'
+        env:
+          ProjectSettings.ProjectName:"UAT Project",
+          ProjectSettings.ProjectName:"This is a UAT project."
     - name: Deploy to IIS
       run:  |
-          stop-webapppool dotnet-core-github-action
-          Copy-item ./dotnet-core-github-action/* C:/inetpub/wwwroot/dotnet-core-github-action -Recurse -Force
-          start-webapppool dotnet-core-github-action
+          stop-webapppool uat-dotnet-core-github-action
+          Copy-item ./uat-dotnet-core-github-action/* C:/inetpub/wwwroot/uat-dotnet-core-github-action -Recurse -Force
+          start-webapppool uat-dotnet-core-github-action
        
