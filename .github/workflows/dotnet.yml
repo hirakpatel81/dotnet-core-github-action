@@ -23,10 +23,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release .\dotnet-core-github-action
+      run: dotnet build --configuration Release
     - name: Publish
-      run: dotnet publish -c Release -o dotnetcoregithubaction .\dotnet-core-github-action
+      run: dotnet publish -c Release -o .\dotnet-core-github-action
     - name: Deploy to IIS
       run: iisreset /stop
-        Copy-item ./dotnetcoregithubaction/* C:/inetpub/wwwroot/dotnetcore-github -Rescue -Force
+        xcopy /s /y .\dotnet-core-github-action\* C:\inetpub\wwwroot\dotnet-core-github-action -Rescue -Force
         iisreset /start
