@@ -31,7 +31,7 @@ jobs:
       with:
         files: '**/appsettings.json'
         env:
-          ProjectSettings.ProjectName:"UAT Project",
+          ProjectSettings.ProjectName:"UAT Project"
           ProjectSettings.ProjectInfo:"This is a UAT project."
     - name: Deploy to IIS
       run:  |
