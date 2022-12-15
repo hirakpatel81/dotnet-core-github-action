@@ -23,9 +23,16 @@ jobs:
     #dotnet restore, build and publish
     - name: Restore dependencies
       run: dotnet restore
-    
+      
+     - name: Build
+      run: dotnet build --configuration Release .\dotnet-core-github-action
+      
     -name: dotnet publish
-     run: dotnet publish -c Release -o dotnetcorewebapp .\dotnet-core-webapp
+     run: dotnet publish -c Release -o dotnetcorewebapp .\dotnet-core-github-action
      
-    - name: Build
-      run: dotnet build --no-restore
+     - name: Deploy to IIS
+      run: |
+        iisreset /stop
+        Copy-Item ./dotnetcorewebapp/* C:/inetpub/wwwroot/dotnet-core-github-action -Recurse -Force
+        iisreset /start
+   
