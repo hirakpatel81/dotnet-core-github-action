@@ -1,5 +1,8 @@
 ﻿@page
+@using Microsoft.Extensions.Options;
+@using dotnet_core_github_action.Helpers;
 @model IndexModel
+@inject IOptions<ProjectSettings> _setting;
 @{
     ViewData["Title"] = "Home page";
 }
@@ -7,5 +10,8 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>Just a change</p>
+    @{
+        <p>Project Name:  @_setting.Value.ProjectName</p>
+        <p>Project Info:  @_setting.Value.ProjectInfo</p>
+    }
 </div>
