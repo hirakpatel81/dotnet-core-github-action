@@ -27,5 +27,5 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o .\dotnet-core-github-action
     - name: Deploy to IIS
-      run:  Copy-item ./dotnet-core-github-action/* C:/inetpub/wwwroot/dotnet-core-github-action -Rescue -Force
+      run:  Copy-item ./dotnet-core-github-action/* C:/inetpub/wwwroot/dotnet-core-github-action -Recurse -Force
        
