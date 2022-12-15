@@ -1,8 +1,10 @@
+using dotnet_core_github_action.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.Configure<ProjectSettings>(builder.Configuration.GetSection("ProjectSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
