@@ -4,6 +4,8 @@
 name: .NET
 
 on:
+  push:
+    branches: [ "UAT" ]
   pull_request:
     branches: [ "UAT" ]
 
@@ -27,7 +29,7 @@ jobs:
     - name: Replace App Settings Value
       uses: microsoft/variable-substitution@v1
       with:
-        files: 'appsettings.json'
+        files: '${{env.DOTNET_ROOT}}/appsettings.json'
         env:
           ProjectSettings.ProjectName:"UAT Project",
           ProjectSettings.ProjectName:"This is a UAT project."
